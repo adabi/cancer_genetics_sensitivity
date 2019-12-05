@@ -1,0 +1,280 @@
+,gene_symbol,driver_gene_status,count_seq,count_numb
+0,ABCB1,Tumour Suppressor,778,0
+1,ABL2,Tumour Suppressor,778,0
+2,ACACA,Tumour Suppressor,778,0
+3,ACVR1B,Tumour Suppressor,778,0
+4,ACVR2A,Tumour Suppressor,778,804
+5,ADCY1,Oncogene,778,0
+6,ADGRL2,Tumour Suppressor,0,0
+7,AFDN,Tumour Suppressor,0,0
+8,AFF4,Tumour Suppressor,778,0
+9,AHCTF1,Tumour Suppressor,778,0
+10,AHNAK,Tumour Suppressor,778,0
+11,AKAP9,Tumour Suppressor,778,804
+12,AKT1,Oncogene,778,804
+13,ALK,Tumour Suppressor,778,0
+14,AMER1,Tumour Suppressor,0,0
+15,AMOT,Tumour Suppressor,778,0
+16,ANK3,Tumour Suppressor,778,804
+17,APAF1,Tumour Suppressor,778,0
+18,APC,Tumour Suppressor,778,804
+19,AQR,Tumour Suppressor,778,0
+20,ARAP3,Tumour Suppressor,778,0
+21,ARFGAP3,Tumour Suppressor,778,804
+22,ARFGEF1,Tumour Suppressor,778,0
+23,ARFGEF2,Tumour Suppressor,778,0
+24,ARHGAP26,Oncogene,778,0
+25,ARHGAP29,Tumour Suppressor,778,0
+26,ARHGEF6,Tumour Suppressor,778,0
+27,ARID1A,Tumour Suppressor,778,0
+28,ARID2,Tumour Suppressor,778,0
+29,ARID4A,Tumour Suppressor,778,0
+30,ARID4B,Tumour Suppressor,778,804
+31,ARID5B,Tumour Suppressor,778,0
+32,ASH1L,Tumour Suppressor,778,0
+33,ASPM,Tumour Suppressor,778,0
+34,ASXL1,Tumour Suppressor,778,804
+35,ATM,Tumour Suppressor,778,0
+36,ATR,Tumour Suppressor,778,0
+37,ATRX,Tumour Suppressor,778,804
+38,AXIN1,Tumour Suppressor,778,0
+39,AXIN2,Tumour Suppressor,778,0
+40,B2M,Tumour Suppressor,778,804
+41,BAP1,Tumour Suppressor,778,0
+42,BAZ2B,Tumour Suppressor,778,0
+43,BCLAF1,Tumour Suppressor,778,0
+44,BCOR,Tumour Suppressor,778,0
+45,BLM,Tumour Suppressor,778,804
+46,BMPR2,Tumour Suppressor,778,0
+47,BNC2,Tumour Suppressor,778,804
+48,BPTF,Tumour Suppressor,778,0
+49,BRAF,Tumour Suppressor,778,0
+50,BRCA1,Tumour Suppressor,778,0
+51,BRCA2,Tumour Suppressor,778,0
+52,BRWD1,Tumour Suppressor,778,0
+53,CAD,Tumour Suppressor,778,0
+54,CASP8,Tumour Suppressor,778,0
+55,CCAR1,Tumour Suppressor,778,0
+56,CCND1,Oncogene,778,804
+57,CDC27,Tumour Suppressor,778,0
+58,CDC73,Tumour Suppressor,778,0
+59,CDH1,Tumour Suppressor,778,0
+60,CDK12,Tumour Suppressor,778,804
+61,CDKN1A,Tumour Suppressor,778,0
+62,CDKN1B,Tumour Suppressor,778,0
+63,CDKN2A,Tumour Suppressor,778,804
+64,CEP290,Tumour Suppressor,778,0
+65,CHD4,Tumour Suppressor,778,804
+66,CHD6,Tumour Suppressor,778,0
+67,CHD9,Tumour Suppressor,778,1609
+68,CIC,Tumour Suppressor,778,804
+69,CLASP2,Tumour Suppressor,778,0
+70,CLOCK,Tumour Suppressor,778,0
+71,CLSPN,Tumour Suppressor,778,0
+72,CMTR2,Tumour Suppressor,0,804
+73,CNOT1,Tumour Suppressor,778,804
+74,CNOT3,Tumour Suppressor,778,0
+75,COL1A1,Tumour Suppressor,778,0
+76,CREBBP,Tumour Suppressor,778,804
+77,CTCF,Tumour Suppressor,778,0
+78,CTNNB1,Oncogene,778,0
+79,CTNND1,Tumour Suppressor,778,0
+80,CUL2,Tumour Suppressor,778,1609
+81,CUL3,Tumour Suppressor,778,804
+82,CUX1,Tumour Suppressor,778,0
+83,CYLD,Tumour Suppressor,778,1609
+84,DDX3X,Tumour Suppressor,778,0
+85,DDX5,Oncogene,778,0
+86,DHX15,Tumour Suppressor,778,0
+87,DHX9,Tumour Suppressor,778,804
+88,DICER1,Tumour Suppressor,778,0
+89,DLG1,Tumour Suppressor,778,0
+90,DNMT3A,Tumour Suppressor,778,0
+91,EGFR,Tumour Suppressor,778,804
+92,EIF4G1,Tumour Suppressor,778,0
+93,EIF4G3,Tumour Suppressor,778,0
+94,ELF1,Tumour Suppressor,778,0
+95,ELF3,Tumour Suppressor,778,0
+96,EPHA2,Tumour Suppressor,778,0
+97,EPHA4,Tumour Suppressor,778,0
+98,ERBB2,Oncogene,778,804
+99,ERBB3,Oncogene,778,0
+100,ERBIN,Tumour Suppressor,0,0
+101,EZH2,Tumour Suppressor,778,0
+102,F8,Tumour Suppressor,778,804
+103,FAF1,Tumour Suppressor,778,804
+104,FAT1,Tumour Suppressor,778,804
+105,FAT2,Tumour Suppressor,778,0
+106,FBXW7,Tumour Suppressor,778,0
+107,FIP1L1,Tumour Suppressor,778,1609
+108,FLT3,Tumour Suppressor,778,804
+109,FN1,Tumour Suppressor,778,0
+110,FOXP1,Tumour Suppressor,778,1609
+111,FRG1BP,Tumour Suppressor,0,0
+112,FXR1,Tumour Suppressor,778,0
+113,G3BP2,Oncogene,778,0
+114,GATA3,Tumour Suppressor,778,804
+115,GNA11,Oncogene,778,804
+116,GPS2,Tumour Suppressor,778,804
+117,HDAC9,Tumour Suppressor,778,804
+118,HGF,Tumour Suppressor,778,0
+119,HLA-A,Tumour Suppressor,0,0
+120,HLA-B,Tumour Suppressor,0,0
+121,HNF1A,Tumour Suppressor,778,0
+122,HRAS,Oncogene,778,804
+123,HSPA8,Oncogene,778,0
+124,IDH1,Oncogene,778,0
+125,IDH2,Oncogene,778,804
+126,INPP4A,Tumour Suppressor,778,804
+127,INPPL1,Tumour Suppressor,778,0
+128,IREB2,Tumour Suppressor,778,0
+129,ITSN1,Tumour Suppressor,778,0
+130,KALRN,Tumour Suppressor,778,0
+131,KAT6B,Tumour Suppressor,778,804
+132,KDM5C,Tumour Suppressor,778,0
+133,KDM6A,Tumour Suppressor,778,0
+134,KDR,Tumour Suppressor,778,0
+135,KEAP1,Tumour Suppressor,778,0
+136,KIT,Tumour Suppressor,778,0
+137,KMT2A,Tumour Suppressor,0,0
+138,KMT2D,Tumour Suppressor,0,0
+139,KRAS,Oncogene,778,804
+140,LAMA2,Tumour Suppressor,778,0
+141,LARP4B,Tumour Suppressor,778,1609
+142,LIMA1,Tumour Suppressor,778,0
+143,LNPEP,Tumour Suppressor,778,0
+144,LRP6,Tumour Suppressor,778,0
+145,LRPPRC,Tumour Suppressor,778,0
+146,MACF1,Tumour Suppressor,778,804
+147,MAGI2,Tumour Suppressor,778,0
+148,MAP2K1,Oncogene,778,0
+149,MAP2K4,Tumour Suppressor,778,804
+150,MAP3K1,Tumour Suppressor,778,0
+151,MAP3K4,Tumour Suppressor,778,804
+152,MAP4K3,Tumour Suppressor,778,0
+153,MAX,Oncogene,778,0
+154,MCM3,Tumour Suppressor,778,804
+155,MECOM,Tumour Suppressor,778,804
+156,MED12,Tumour Suppressor,778,0
+157,MED23,Tumour Suppressor,778,0
+158,MED24,Tumour Suppressor,778,804
+159,MET,Tumour Suppressor,778,804
+160,MGA,Tumour Suppressor,778,804
+161,MKL1,Tumour Suppressor,778,0
+162,MLH1,Tumour Suppressor,778,0
+163,MLH3,Tumour Suppressor,778,0
+164,MNDA,Tumour Suppressor,778,0
+165,MSR1,Tumour Suppressor,778,0
+166,MTOR,Tumour Suppressor,778,0
+167,MYC,Oncogene,778,804
+168,MYCN,Oncogene,778,804
+169,MYH11,Tumour Suppressor,778,0
+170,MYH14,Tumour Suppressor,778,0
+171,MYH9,Tumour Suppressor,778,0
+172,NCOR1,Tumour Suppressor,778,0
+173,NCOR2,Tumour Suppressor,778,0
+174,NF1,Tumour Suppressor,778,804
+175,NF2,Tumour Suppressor,778,0
+176,NFE2L2,Oncogene,778,804
+177,NOTCH1,Tumour Suppressor,778,1609
+178,NOTCH2,Tumour Suppressor,778,804
+179,NPM1,Tumour Suppressor,778,0
+180,NR4A2,Tumour Suppressor,778,0
+181,NRAS,Oncogene,778,804
+182,NSD1,Tumour Suppressor,778,0
+183,NSD2,Tumour Suppressor,0,0
+184,NSD3,Tumour Suppressor,0,0
+185,NTN4,Oncogene,778,0
+186,NTRK2,Oncogene,778,1609
+187,NUP93,Tumour Suppressor,778,804
+188,NUP98,Tumour Suppressor,778,0
+189,NUTM1,Tumour Suppressor,0,0
+190,PABPC3,Tumour Suppressor,778,804
+191,PBRM1,Tumour Suppressor,778,0
+192,PCDH18,Tumour Suppressor,778,804
+193,PCSK5,Tumour Suppressor,778,1609
+194,PGR,Tumour Suppressor,778,0
+195,PHF6,Tumour Suppressor,778,0
+196,PHLPP1,Tumour Suppressor,778,0
+197,PIK3C2B,Tumour Suppressor,778,804
+198,PIK3CA,Tumour Suppressor,778,0
+199,PIK3CB,Oncogene,778,804
+200,PIK3R1,Tumour Suppressor,778,0
+201,PLCB1,Tumour Suppressor,778,0
+202,PLCG1,Oncogene,778,0
+203,PLXNA1,Tumour Suppressor,778,0
+204,POLR2B,Tumour Suppressor,778,0
+205,PPP2R1A,Oncogene,778,0
+206,PSIP1,Tumour Suppressor,778,804
+207,PTCH1,Tumour Suppressor,778,0
+208,PTEN,Tumour Suppressor,778,804
+209,PTPN11,Oncogene,778,0
+210,PTPRU,Tumour Suppressor,778,0
+211,RAC1,Oncogene,778,804
+212,RAD21,Tumour Suppressor,778,804
+213,RASA1,Tumour Suppressor,778,0
+214,RASA2,Tumour Suppressor,778,0
+215,RB1,Tumour Suppressor,778,804
+216,RBM10,Tumour Suppressor,778,0
+217,RBM5,Tumour Suppressor,778,0
+218,RGS3,Tumour Suppressor,778,0
+219,RHOA,Oncogene,778,0
+220,RHOT1,Oncogene,778,0
+221,RNF43,Tumour Suppressor,778,0
+222,ROBO2,Tumour Suppressor,778,0
+223,RPGR,Tumour Suppressor,778,804
+224,RTN4,Tumour Suppressor,778,0
+225,RUNX1,Tumour Suppressor,778,0
+226,SCAI,Tumour Suppressor,778,0
+227,SEC31A,Tumour Suppressor,778,0
+228,SETD2,Tumour Suppressor,778,0
+229,SETDB1,Tumour Suppressor,778,804
+230,SF3B1,Oncogene,778,0
+231,SIN3A,Tumour Suppressor,778,0
+232,SMAD2,Tumour Suppressor,778,0
+233,SMAD4,Tumour Suppressor,778,804
+234,SMARCA1,Tumour Suppressor,778,0
+235,SMARCA4,Tumour Suppressor,778,804
+236,SMARCB1,Tumour Suppressor,778,0
+237,SMC1A,Oncogene,778,0
+238,SOS1,Tumour Suppressor,778,0
+239,SOS2,Tumour Suppressor,778,804
+240,SOX9,Tumour Suppressor,778,804
+241,SPOP,Oncogene,778,0
+242,SPTAN1,Tumour Suppressor,778,0
+243,SRGAP1,Tumour Suppressor,778,804
+244,SRGAP3,Tumour Suppressor,778,804
+245,STAG1,Tumour Suppressor,778,804
+246,STAG2,Tumour Suppressor,778,0
+247,STIP1,Tumour Suppressor,778,0
+248,STK11,Tumour Suppressor,778,804
+249,STK4,Oncogene,778,804
+250,SVEP1,Tumour Suppressor,778,0
+251,TAOK1,Tumour Suppressor,778,804
+252,TBL1XR1,Tumour Suppressor,778,0
+253,TBX3,Tumour Suppressor,778,0
+254,TCF12,Tumour Suppressor,778,0
+255,TCF4,Tumour Suppressor,778,0
+256,TCF7L2,Tumour Suppressor,778,0
+257,TET2,Tumour Suppressor,778,0
+258,THRAP3,Tumour Suppressor,778,0
+259,TJP1,Tumour Suppressor,778,0
+260,TJP2,Tumour Suppressor,778,1609
+261,TP53,Tumour Suppressor,778,804
+262,TRIO,Tumour Suppressor,778,804
+263,TSC1,Tumour Suppressor,778,0
+264,U2AF1,Oncogene,778,0
+265,UPF3B,Tumour Suppressor,778,0
+266,USP6,Tumour Suppressor,778,0
+267,VHL,Tumour Suppressor,778,0
+268,WNK1,Tumour Suppressor,778,804
+269,XPO1,Oncogene,778,804
+270,XRN1,Tumour Suppressor,778,0
+271,ZC3H11A,Tumour Suppressor,778,804
+272,ZFHX3,Tumour Suppressor,778,804
+273,ZFP36L1,Tumour Suppressor,778,0
+274,ZFP36L2,Tumour Suppressor,778,0
+275,ZMYM2,Tumour Suppressor,778,804
+276,ZNF292,Tumour Suppressor,778,804
+277,ZNF638,Tumour Suppressor,778,0
+278,ZNRF3,Tumour Suppressor,778,804
