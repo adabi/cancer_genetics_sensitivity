@@ -2,13 +2,15 @@ import pubchempy as pcp
 import pandas as pd
 from padelpy import padeldescriptor, from_smiles
 import numpy as np
+from PIL import Image
+from collections import OrderedDict
 
 
 def find_smiles(drugs_file):
     drugs_df = pd.read_csv(drugs_file)
     drugs = list(drugs_df['drug_id'])
     smiles_lst = []
-
+    cid_lst = []
     # This list keeps track of the drugs for which a smiles was extracted successfully
     drugs_with_smiles = []
 
@@ -21,32 +23,34 @@ def find_smiles(drugs_file):
         try:
             # If the Pubchem id is an integer, use that
             pubchem_id = int(pubchem_id)
-            smiles = pcp.Compound.from_cid(pubchem_id).isomeric_smiles
+            smiles = pcp.Compound.from_cid(pubchem_id)
             smiles_lst.append(smiles)
             drugs_with_smiles.append(drug)
+            cid_lst.append(pubchem_id)
 
         except ValueError:
             # If it's something else like '-' or 'several' use the drug name to find the smiles
             drug_name = drugs_df['drug_name'][drugs_df['drug_id'] == drug].tolist()[0]
-
-            # get_compounds returns a list of compounds, grab the first one
-            compound = pcp.get_compounds(drug_name, 'name')[0]
-
-            if compound:
+            compounds = pcp.get_compounds(drug_name, 'name')
+            if compounds:
+                # get_compounds returns a list of compounds, grab the first one
+                compound = compounds[0]
                 smiles = compound.isomeric_smiles
                 smiles_lst.append(smiles)
                 drugs_with_smiles.append(drug)
+                cid_lst.append(compound.cid)
 
     with open('smiles.smi', 'w+') as file:
         for item in smiles_lst:
             file.write(f'{item}\n')
 
-    with open('./Data/Clean/drugs_with_smiles.csv', 'w+') as file:
-        for drug in drugs_with_smiles:
-            file.write(f'{drug}\n')
+    drugs_with_smiles_dict = {'drug_id': drugs_with_smiles, 'cid': cid_lst}
+    drugs_with_smiles_df = pd.DataFrame(data=drugs_with_smiles_dict)
+    drugs_with_smiles_df.to_csv(path_or_buf='./Data/Clean/drugs_with_smiles.csv')
 
 
 def calculate_descriptors(drugs_file):
+    print("Calculating descriptors..")
     find_smiles(drugs_file)
     # Find the descriptors from the smiles and store it
     padeldescriptor(
@@ -71,6 +75,65 @@ def calculate_descriptors(drugs_file):
     # the model doesn't shake out)
     cols = (list(descriptors_df.columns))[1:]
     descriptors_df[cols] = descriptors_df[cols].replace({np.nan: 0, 'infinity': 0})
-    descriptors_df.to_csv('./Data/Clean/descriptors_replaced.csv')
+    descriptors_df.drop('Name', axies = 1)
+    descriptors_df.to_csv('./Data/Clean/descriptors_replaced.csv', index=False)
+
+
+# Grab and store the pixel data for each drug
+def calculate_drug_pixel_data(drugs_with_smiles_file):
+    print("Calculating pixel data...")
+    drugs_with_smiles_df = pd.read_csv(drugs_with_smiles_file)
+    cid_lst = list(drugs_with_smiles_df['cid'])
+    pixels_dict = OrderedDict()
+    for i in range(10000):
+        pixels_dict[f'pixel{i}'] = []
+    for cid in cid_lst:
+        # Download the picture of the compound from PubChem
+        pcp.download('PNG', 'drug.png', int(cid), 'cid', overwrite=True)
+        # Convert to single-channel greyscale
+        img = Image.open('drug.png').convert('L')
+        # Get the pixel data as a numpy array
+        pixels = np.array(img)
+        # The background for these images is grey and not white
+        # Turn all grey pixels into white pixels
+        pixels[pixels == 245] = 255
+        # Make any non-grey pixel completely black
+        # This ensures that all atoms and bonds have the same pixel intensity
+        pixels[pixels < 245] = 0
+        # Downsample using antialiasing to 100 by 100 pixels
+        img = Image.fromarray(pixels)
+        img = img.resize((100, 100), Image.ANTIALIAS)
+        img.save('./greyscale.png')
+        # Grab pixel data again
+        pixels = np.array(img)
+        # Flatten and save
+        pixels = pixels.flatten()
+        for i, pixel in enumerate(pixels):
+            pixels_dict[f'pixel{i}'].append(pixel)
+
+    drug_id_lst = list(drugs_with_smiles_df['drug_id'])
+    pixels_dict['cid'] = cid_lst
+    pixels_dict.move_to_end('cid', last=False)
+    pixels_dict['drug_id'] = drug_id_lst
+    pixels_dict.move_to_end('drug_id', last=False)
+    drug_pixel_df = pd.DataFrame(data=pixels_dict)
+    drug_pixel_df.to_csv('./Data/Clean/drug_pixels.csv', index=False)
+
+
+# This function grabs descriptor and drug data and combines it all
+def calculate_drug_data(raw_drugs_file):
+    calculate_descriptors(drugs_file=raw_drugs_file)
+    calculate_drug_pixel_data(
+       drugs_with_smiles_file='./Data/Clean/drugs_with_smiles.csv')
+    print("Combining all data...")
+    descriptors_df = pd.read_csv('./Data/Clean/descriptors_replaced.csv')
+    pixels_df = pd.read_csv('./Data/Clean/drug_pixels.csv')
+    total_df = pd.concat((descriptors_df, pixels_df), axis=1)
+    cols = total_df.columns.tolist()
+    cols.insert(0, cols.pop(cols.index('cid')))
+    cols.insert(0, cols.pop(cols.index('drug_id')))
+    total_df = total_df.reindex(columns = cols)
+    total_df.to_csv('./Data/Clean/drugs_fulldata.csv', index=False)
+
 
 

@@ -1,6 +1,6 @@
 import pandas as pd
 from collections import Counter
-from drug_data import calculate_descriptors
+from drug_data import calculate_drug_data
 
 
 def clean_genetic_features():
@@ -68,7 +68,8 @@ def find_useful_mutations():
                                                (cancer_genes_df['count_numb'] > 0)]
     cancer_genes_relevant_df.to_csv('Data/cancer_genes_relevant.csv')
 
-#calculate_descriptors('.Data/Raw/Drugs.csv')
 #clean_genetic_features()
 #find_useful_mutations()
+#calculate_drug_data('./Data/Raw/Drugs.csv')
+
 
