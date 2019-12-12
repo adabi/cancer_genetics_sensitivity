@@ -68,6 +68,9 @@ def find_useful_mutations():
                                                (cancer_genes_df['count_numb'] > 0)]
     cancer_genes_relevant_df.to_csv('Data/cancer_genes_relevant.csv')
 
+# This matches every cosmic sample ID to its genetic features
+
+
 #clean_genetic_features()
 #find_useful_mutations()
 #calculate_drug_data('./Data/Raw/Drugs.csv')

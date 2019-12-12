@@ -4,6 +4,8 @@ from padelpy import padeldescriptor, from_smiles
 import numpy as np
 from PIL import Image
 from collections import OrderedDict
+import scikit_posthocs
+
 
 
 def find_smiles(drugs_file):
@@ -74,9 +76,19 @@ def calculate_descriptors(drugs_file):
     # Replace all the missing features and infinities with 0s (might have to change this later if
     # the model doesn't shake out)
     cols = (list(descriptors_df.columns))[1:]
-    descriptors_df[cols] = descriptors_df[cols].replace({np.nan: 0, 'infinity': 0})
-    descriptors_df.drop('Name', axies = 1)
-    descriptors_df.to_csv('./Data/Clean/descriptors_replaced.csv', index=False)
+    # Replace nan and infinity values with 0s
+    descriptors_df[cols] = descriptors_df[cols].replace({np.nan: 0, '': 0, 'Infinity': 0, '-Infinity': 0})
+    descriptors_df = descriptors_df.apply(lambda x: np.array(x).astype(float))
+    # Some values are huge which causes issues during numpy calculations
+    # Make them not so enormous
+    descriptors_df[descriptors_df > 10E100] = 10E100
+    # Get rid of outliers using the Extreme Studentized Deviate test
+    descriptors_df = descriptors_df.apply(scikit_posthocs.outliers_gesd)
+    # Get rid of columns which have all 0s
+    descriptors_df = descriptors_df.loc[:, (descriptors_df != 0).any(axis=0)]
+    # Scale every column
+    descriptors_df = descriptors_df.apply(scale_array)
+    descriptors_df.to_csv('./Data/Clean/descriptors_scaled.csv', index=False)
 
 
 # Grab and store the pixel data for each drug
@@ -135,5 +147,9 @@ def calculate_drug_data(raw_drugs_file):
     total_df = total_df.reindex(columns = cols)
     total_df.to_csv('./Data/Clean/drugs_fulldata.csv', index=False)
 
+
+def scale_array(array):
+    scaled_array = (array - np.min(array))/(np.max(array) - np.min(array))
+    return scaled_array
 
 
