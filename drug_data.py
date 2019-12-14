@@ -7,7 +7,6 @@ from collections import OrderedDict
 import scikit_posthocs
 
 
-
 def find_smiles(drugs_file):
     drugs_df = pd.read_csv(drugs_file)
     drugs = list(drugs_df['drug_id'])
@@ -115,11 +114,12 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
         # Downsample using antialiasing to 100 by 100 pixels
         img = Image.fromarray(pixels)
         img = img.resize((100, 100), Image.ANTIALIAS)
-        img.save('./greyscale.png')
         # Grab pixel data again
         pixels = np.array(img)
-        # Flatten and save
+        # Flatten
         pixels = pixels.flatten()
+        # Scale
+        pixels = scale_array(pixels)
         for i, pixel in enumerate(pixels):
             pixels_dict[f'pixel{i}'].append(pixel)
 
@@ -134,7 +134,7 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
 
 # This function grabs descriptor and drug data and combines it all
 def calculate_drug_data(raw_drugs_file):
-    calculate_descriptors(drugs_file=raw_drugs_file)
+    #calculate_descriptors(drugs_file=raw_drugs_file)
     calculate_drug_pixel_data(
        drugs_with_smiles_file='./Data/Clean/drugs_with_smiles.csv')
     print("Combining all data...")
@@ -144,7 +144,7 @@ def calculate_drug_data(raw_drugs_file):
     cols = total_df.columns.tolist()
     cols.insert(0, cols.pop(cols.index('cid')))
     cols.insert(0, cols.pop(cols.index('drug_id')))
-    total_df = total_df.reindex(columns = cols)
+    total_df = total_df.reindex(columns=cols)
     total_df.to_csv('./Data/Clean/drugs_fulldata.csv', index=False)
 
 
@@ -152,4 +152,4 @@ def scale_array(array):
     scaled_array = (array - np.min(array))/(np.max(array) - np.min(array))
     return scaled_array
 
-
+calculate_drug_data(raw_drugs_file=None)

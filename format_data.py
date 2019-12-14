@@ -68,31 +68,42 @@ def find_useful_mutations():
                                                (cancer_genes_df['count_numb'] > 0)]
     cancer_genes_relevant_df.to_csv('Data/cancer_genes_relevant.csv')
 
+
 # This matches every cosmic sample ID to its genetic features
+def consolidate_genetic_features(genetic_features_file, microsatellite_file):
+    genetic_features_df = pd.read_csv(genetic_features_file)
+    # Initialize empty dictionary
+    genetic_features_dict = {x:[] for x in pd.unique(genetic_features_df['genetic_feature'])}
+    genetic_features_dict['cosmic_sample_id'] = []
+    # Construct a list of unqiue cosmic sample ids
+    cosmic_sample_id_lst = pd.unique(genetic_features_df['cosmic_sample_id'])
+    for sample in cosmic_sample_id_lst:
+        # Get a slice of the data frame where the features are mutated
+        test_df = genetic_features_df[(genetic_features_df['cosmic_sample_id'] == sample) &
+                                      (genetic_features_df['is_mutated'] == 1)]
+        # Store the mutated features in a list
+        mutations_lst = test_df['genetic_feature'].tolist()
+        genetic_features_dict['cosmic_sample_id'].append(sample)
+        for key in genetic_features_dict:
+            if key == 'cosmic_sample_id':
+                pass
+            elif key in mutations_lst:
+                # If the feature is in the mutated features list its value is encoded as 1
+                genetic_features_dict[key].append(1)
+            else:
+                # If it is not mutated or is missing, it's encoded as 0
+                genetic_features_dict[key].append(0)
+
+    # Now we add the microsatellite instability:
+    microsatellite_df = pd.read_csv('./Data/Raw/microsattelite_data.csv')
+    microsatellite_df['microsatellite'] = 0
+    microsatellite_df.loc[microsatellite_df['MIS'] ]
+    to_save = pd.DataFrame(data=genetic_features_dict)
+    to_save.to_csv("./Data/Clean/sample_id_features.csv", index=False)
 
 
 #clean_genetic_features()
-#find_useful_mutations()
 #calculate_drug_data('./Data/Raw/Drugs.csv')
-genetic_features_df = pd.read_csv('./Data/clean/genetic_features_clean.csv')
-genetic_features_dict = {x:[] for x in pd.unique(genetic_features_df['genetic_feature'])}
-genetic_features_dict['cosmic_sample_id'] = []
-cosmic_sample_id_lst = pd.unique(genetic_features_df['cosmic_sample_id'])
-for sample in cosmic_sample_id_lst:
-    test_df = genetic_features_df[(genetic_features_df['cosmic_sample_id'] == sample) &
-                                  (genetic_features_df['is_mutated'] == 1)]
-    mutations_lst = test_df['genetic_feature'].tolist()
-    genetic_features_dict['cosmic_sample_id'].append(sample)
-    for key in genetic_features_dict:
-        if key == 'cosmic_sample_id':
-            pass
-        elif key in mutations_lst:
-            genetic_features_dict[key].append(1)
-        else:
-            genetic_features_dict[key].append(0)
-
-
-to_save = pd.DataFrame(data=genetic_features_dict)
-to_save.to_csv("./Data/Clean/sample_id_features.csv", index=False)
+#consolidate_genetic_features('./Data/Clean/genetic_features_clean.csv')
 
 
