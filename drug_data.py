@@ -96,7 +96,7 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
     drugs_with_smiles_df = pd.read_csv(drugs_with_smiles_file)
     cid_lst = list(drugs_with_smiles_df['cid'])
     pixels_dict = OrderedDict()
-    for i in range(10000):
+    for i in range(1600):
         pixels_dict[f'pixel{i}'] = []
     for cid in cid_lst:
         # Download the picture of the compound from PubChem
@@ -113,7 +113,7 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
         pixels[pixels < 245] = 0
         # Downsample using antialiasing to 100 by 100 pixels
         img = Image.fromarray(pixels)
-        img = img.resize((100, 100), Image.ANTIALIAS)
+        img = img.resize((40, 40), Image.ANTIALIAS)
         # Grab pixel data again
         pixels = np.array(img)
         # Flatten
@@ -151,5 +151,3 @@ def calculate_drug_data(raw_drugs_file):
 def scale_array(array):
     scaled_array = (array - np.min(array))/(np.max(array) - np.min(array))
     return scaled_array
-
-calculate_drug_data(raw_drugs_file=None)
