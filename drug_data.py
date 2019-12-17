@@ -5,6 +5,8 @@ import numpy as np
 from PIL import Image
 from collections import OrderedDict
 import scikit_posthocs
+import os
+import contextlib
 
 
 def find_smiles(drugs_file):
@@ -88,6 +90,8 @@ def calculate_descriptors(drugs_file):
     # Scale every column
     descriptors_df = descriptors_df.apply(scale_array)
     descriptors_df.to_csv('./Data/Clean/descriptors_scaled.csv', index=False)
+    with contextlib.suppress(FileNotFoundError):
+        os.remove('smiles.smi')
 
 
 # Grab and store the pixel data for each drug
@@ -130,11 +134,13 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
     pixels_dict.move_to_end('drug_id', last=False)
     drug_pixel_df = pd.DataFrame(data=pixels_dict)
     drug_pixel_df.to_csv('./Data/Clean/drug_pixels.csv', index=False)
+    with contextlib.suppress(FileNotFoundError):
+        os.remove('drug.png')
 
 
 # This function grabs descriptor and drug data and combines it all
 def calculate_drug_data(raw_drugs_file):
-    #calculate_descriptors(drugs_file=raw_drugs_file)
+    calculate_descriptors(drugs_file=raw_drugs_file)
     calculate_drug_pixel_data(
        drugs_with_smiles_file='./Data/Clean/drugs_with_smiles.csv')
     print("Combining all data...")

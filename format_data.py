@@ -3,7 +3,6 @@ from collections import Counter, defaultdict
 import numpy as np
 from drug_data import calculate_drug_data
 
-
 def clean_genetic_features():
     # The csv file is strangely formatted, so we need to clean it up for use with pandas
     with open("Data/Raw/genetic_features_all.csv") as file:
@@ -124,6 +123,9 @@ def create_training_file(drugs_data_file, genetic_features_file, IC50_vals_file)
     df_train = pd.merge(ic50_df, genetic_features_df, on='cosmic_sample_id')
     print("Adding drug descriptor data...")
     df_train = pd.merge(df_train, drugs_data_df, on='drug_id')
+    features = np.array(df_train.drop(columns=['IC50', 'drug_id ', 'cosmic_sample_id']))
+    print("Saving to file...")
+    np.save(file='./Data/Clean/features.npy', arr=features)
     outputs = np.array(df_train['IC50'])
     np.save(file='./Data/Clean/outputs.npy', arr=outputs)
 
@@ -135,10 +137,11 @@ def downcast_columns(column):
         return column.astype('float16')
 
 
-# clean_genetic_features()
-# calculate_drug_data('./Data/Raw/Drugs.csv')
-#consolidate_genetic_features('./Data/Clean/genetic_features_clean.csv', './Data/Raw/microsattelite_data.csv')
+clean_genetic_features()
+calculate_drug_data('./Data/Raw/Drugs.csv')
+consolidate_genetic_features('./Data/Clean/genetic_features_clean.csv', './Data/Raw/microsattelite_data.csv')
 create_training_file(drugs_data_file='./Data/Clean/drugs_fulldata.csv',
                      genetic_features_file='./Data/Clean/sample_id_features.csv',
                      IC50_vals_file='./Data/Raw/IC50_vals.csv')
+
 
