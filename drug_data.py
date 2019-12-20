@@ -100,7 +100,7 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
     drugs_with_smiles_df = pd.read_csv(drugs_with_smiles_file)
     cid_lst = list(drugs_with_smiles_df['cid'])
     pixels_dict = OrderedDict()
-    for i in range(1600):
+    for i in range(3600):
         pixels_dict[f'pixel{i}'] = []
     for cid in cid_lst:
         # Download the picture of the compound from PubChem
@@ -115,15 +115,18 @@ def calculate_drug_pixel_data(drugs_with_smiles_file):
         # Make any non-grey pixel completely black
         # This ensures that all atoms and bonds have the same pixel intensity
         pixels[pixels < 245] = 0
-        # Downsample using antialiasing to 100 by 100 pixels
+
         img = Image.fromarray(pixels)
-        img = img.resize((40, 40), Image.ANTIALIAS)
+        # Downsample using antialiasing to 60 by 60 pixels
+        img = img.resize((60, 60), Image.ANTIALIAS)
         # Grab pixel data again
         pixels = np.array(img)
+        # Reverse the pixels so that the darkest areas have the highest value
+        pixels = 255-pixels
         # Flatten
         pixels = pixels.flatten()
         # Scale
-        pixels = scale_array(pixels)
+        #pixels = scale_array(pixels)
         for i, pixel in enumerate(pixels):
             pixels_dict[f'pixel{i}'].append(pixel)
 
@@ -144,7 +147,7 @@ def calculate_drug_data(raw_drugs_file):
     calculate_drug_pixel_data(
        drugs_with_smiles_file='./Data/Clean/drugs_with_smiles.csv')
     print("Combining all data...")
-    descriptors_df = pd.read_csv('./Data/Clean/descriptors_replaced.csv')
+    descriptors_df = pd.read_csv('./Data/Clean/descriptors_scaled.csv')
     pixels_df = pd.read_csv('./Data/Clean/drug_pixels.csv')
     total_df = pd.concat((descriptors_df, pixels_df), axis=1)
     cols = total_df.columns.tolist()
@@ -157,3 +160,20 @@ def calculate_drug_data(raw_drugs_file):
 def scale_array(array):
     scaled_array = (array - np.min(array))/(np.max(array) - np.min(array))
     return scaled_array
+
+descriptors_df = pd.read_csv('./Data/Clean/descriptors.csv')
+descriptors_df['Index'] = [int(x[2]) for x in descriptors_df.Name.str.split("_")]
+descriptors_df.set_index('Index', drop=True, inplace=True)
+descriptors_df.sort_index(inplace=True)
+descriptors_df = descriptors_df.iloc[:, 0:1172]
+print(descriptors_df.shape)
+pixels_df = pd.read_csv('./Data/Clean/drug_pixels.csv')
+descriptors_df['drug_id'] = pixels_df['drug_id']
+# Replace all the missing features and infinities with 0s (might have to change this later if
+# the model doesn't shake out)
+cols = (list(descriptors_df.columns))[1:]
+# Replace nan and infinity values with 0s
+descriptors_df[cols] = descriptors_df[cols].replace({np.nan: 0, '': 0, 'Infinity': 0, '-Infinity': 0})
+descriptors_df = descriptors_df.loc[:, (descriptors_df != 0).any(axis=0)]
+descriptors_df = descriptors_df.drop(columns=['Name'])
+descriptors_df.to_csv('./Data/Clean/descriptors_unscaled.csv', index=False)

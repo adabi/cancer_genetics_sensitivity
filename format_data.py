@@ -137,11 +137,16 @@ def downcast_columns(column):
         return column.astype('float16')
 
 
-clean_genetic_features()
-calculate_drug_data('./Data/Raw/Drugs.csv')
-consolidate_genetic_features('./Data/Clean/genetic_features_clean.csv', './Data/Raw/microsattelite_data.csv')
-create_training_file(drugs_data_file='./Data/Clean/drugs_fulldata.csv',
-                     genetic_features_file='./Data/Clean/sample_id_features.csv',
-                     IC50_vals_file='./Data/Raw/IC50_vals.csv')
+# clean_genetic_features()
+# calculate_drug_data('./Data/Raw/Drugs.csv')
+# consolidate_genetic_features('./Data/Clean/genetic_features_clean.csv', './Data/Raw/microsattelite_data.csv')
+# create_training_file(drugs_data_file='./Data/Clean/drugs_fulldata.csv',
+#                      genetic_features_file='./Data/Clean/sample_id_features.csv',
+#                      IC50_vals_file='./Data/Raw/IC50_vals.csv')
 
-
+ic50_df = pd.read_csv('./Data/Raw/IC50_vals.csv')
+# We only need three columns from the ic50 file
+ic50_df = ic50_df[['Drug Id', 'Cosmic sample Id', 'IC50']]
+ic50_df = ic50_df.rename(columns={'Drug Id': 'drug_id',
+                                  'Cosmic sample Id': 'cosmic_sample_id'})
+print(len(pd.unique(ic50_df['drug_id'])))
