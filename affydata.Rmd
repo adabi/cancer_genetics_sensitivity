@@ -1,0 +1,23 @@
+```{r}
+
+library(oligo)
+library(ff)
+celFiles <- list.celfiles('./Data/Affymetrix/Raw/Sample Files', full.names=TRUE)
+
+
+rawData <- read.celfiles(celFiles)
+ppData <- rma(rawData)
+
+```
+
+
+```{r}
+ppData
+mat <- exprs(ppData)
+
+```
+
+```{r}
+as.data.frame(mat[,])
+```
+
